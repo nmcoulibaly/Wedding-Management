@@ -1,0 +1,44 @@
+<?php
+require_once "../../bootstrap.php";
+$epoux = new Personne();
+$epoux->setNom("Nangui");
+$epoux->setPrenom("Adonai");
+$epoux->setNumero("776816079");
+$epoux->setSexe("M");
+$entityManager->persist($epoux);
+$entityManager->flush();
+$epouse = new Personne();
+$epouse->setNom("Ndaiye");
+$epouse->setPrenom("Adja");
+$epouse->setNumero("776816073");
+$epouse->setSexe("F");
+$entityManager->persist($epouse);
+$entityManager->flush();
+$invite1 = new Invite();
+$invite1->setNom("Sidibe");
+$invite1->setPrenom("Sidy");
+$invite1->setStatus("Temoin");
+$invite1->setSexe("M");
+$invite1->setNumero("7723456678");
+$entityManager->persist($invite1);
+$entityManager->flush();
+$invite2 = new Invite();
+$invite2->setNom("Diop");
+$invite2->setPrenom("Adja");
+$invite2->setStatus("Temoin");
+$invite2->setSexe("F");
+$invite2->setNumero("7723456640");
+$entityManager->persist($invite2);
+$entityManager->flush();
+$mariage = new Mariage();
+$mariage->setNumero(1);
+$mariage->setDate("12/09/2021"); 
+$mariage->setEpoux($epoux);
+$mariage->setEpouse($epouse);
+$mariage->getInvites()->add($invite1);
+$mariage->getInvites()->add($invite2);
+$entityManager->persist($mariage);
+$entityManager->flush();
+echo $mariage->getNumero();
+
+?>
